@@ -1,16 +1,22 @@
 import React from 'react';
-import { View, Text, FlatList, StatusBar } from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
 import SubApp from '../components/SubApp';
 
-class Home extends React.Component {
-  render() {
-    return (
-      <View>
-        <StatusBar hidden={true} />
-        <SubApp name={'Aniket'} />
-      </View>
-    );
-  }
-}
+const Home = ({ navigation }) => {
+  return (
+    <View style={styles.container}>
+      <StatusBar hidden={true} />
+      <SubApp navigation={navigation} name={'Birthdays'} />
+      <SubApp navigation={navigation} name={'To-Dos'} />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+});
 
 export default Home;
