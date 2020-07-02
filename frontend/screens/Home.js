@@ -1,20 +1,40 @@
 import React from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
+import { View, StyleSheet, StatusBar, FlatList } from 'react-native';
 import SubApp from '../components/SubApp';
+
+const subapps = [
+  {
+    name: 'Birthdays',
+    icon: 'birthday-cake',
+  },
+  {
+    name: 'Passwords',
+    icon: 'key',
+  },
+  {
+    name: 'To-Dos',
+    icon: 'list-ul',
+  },
+];
 
 const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar hidden={true} />
-      <SubApp navigation={navigation} name={'Birthdays'} />
-      <SubApp navigation={navigation} name={'To-Dos'} />
+      <FlatList
+        data={subapps}
+        keyExtractor={(item) => item.name}
+        renderItem={({ item }) => (
+          <SubApp navigation={navigation} name={item.name} icon={item.icon} />
+        )}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center',
   },
 });

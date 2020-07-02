@@ -4,13 +4,13 @@ import BdayCard from '../components/BdayCard';
 import { Button, Icon, Text } from 'native-base';
 import AddBdayModal from './AddBdayModal';
 
-const Birthday = ({ navigation }) => {
+const Birthdays = ({ navigation }) => {
   const [birthdayList, setBirthdayList] = useState([]);
 
   const loadBirthdays = useCallback(async () => {
-    const result = await fetch(
-      'http://192.168.0.104:8000/birthdays',
-    ).catch((err) => console.log(err));
+    const result = await fetch('http://192.168.0.105:8000/').catch((err) =>
+      console.log(err),
+    );
 
     const list = await result.json();
 
@@ -29,11 +29,12 @@ const Birthday = ({ navigation }) => {
     <View style={styles.container}>
       <Button
         transparent
+        iconLeft
         onPress={() => navigation.navigate('AddBdayModal')}
         style={styles.buttonStyle}
       >
-        <Icon name="ios-add" style={{ color: '#5f27cd' }} />
-        <Text style={{ fontSize: 14, color: '#5f27cd' }}>Add Birthday</Text>
+        <Icon name="ios-add" style={{ color: '#5f27cd', fontSize: 25 }} />
+        <Text style={{ color: '#5f27cd' }}>Add a birthday</Text>
       </Button>
       <FlatList
         data={birthdayList}
@@ -41,8 +42,21 @@ const Birthday = ({ navigation }) => {
         renderItem={({ item }) => (
           <BdayCard name={item.name} note={item.note} date={item.date} />
         )}
+        ItemSeparatorComponent={Separator}
       />
     </View>
+  );
+};
+
+const Separator = () => {
+  return (
+    <View
+      style={{
+        height: 1,
+        width: '100%',
+        backgroundColor: '#5f27cd',
+      }}
+    />
   );
 };
 
@@ -52,8 +66,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   buttonStyle: {
-    width: 240,
+    width: 160,
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'left',
   },
 });
 
-export default Birthday;
+export default Birthdays;

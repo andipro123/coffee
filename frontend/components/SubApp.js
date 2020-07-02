@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Card, CardItem, Body, Text, Left } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const SubApp = ({ navigation, name }) => {
+const SubApp = ({ navigation, name, icon }) => {
   return (
     <View style={styles.container}>
       <Card style={styles.cardStyle}>
@@ -11,12 +11,12 @@ const SubApp = ({ navigation, name }) => {
           style={styles.cardItemStyle}
           button
           onPress={() => {
-            navigation.navigate('Birthday');
+            navigation.navigate(name);
           }}
         >
           <Icon
-            name="birthday-cake"
-            size={20}
+            name={icon}
+            size={30}
             color="#5f27cd"
             style={styles.iconStyle}
           />
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   },
   cardStyle: {
     padding: 10,
-    width: 160,
-    height: 160,
+    width: 330,
+    height: 130,
   },
   cardItemStyle: {
     flex: 1,

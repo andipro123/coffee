@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/Home';
 import AddBdayModal from './screens/AddBdayModal';
-import Birthday from './screens/Birthday';
+import Birthdays from './screens/Birthdays';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const RootStack = createStackNavigator();
@@ -13,26 +13,34 @@ const MainStack = createStackNavigator();
 const MainStackScreen = () => {
   return (
     <MainStack.Navigator
-      initialRouteNam="Home"
+      initialRouteName="Home"
       screenOptions={{
         headerStyle: {
           backgroundColor: '#5f27cd',
           height: 80,
         },
+        headerTitle: 'coffee',
         headerBackTitleVisible: false,
         headerTintColor: '#fff',
         headerTitleAlign: 'left',
         headerTitleStyle: {
           fontWeight: 'bold',
           fontSize: 30,
-          padding: 10,
+          marginBottom: 6,
+          marginLeft: 6,
         },
+        headerLeft: () => (
+          <Icon
+            name="coffee"
+            style={{ fontSize: 35, color: '#fff', marginLeft: 30 }}
+          />
+        ),
       }}
     >
       <MainStack.Screen name="Home" component={Home} />
       <MainStack.Screen
-        name="Birthday"
-        component={Birthday}
+        name="Birthdays"
+        component={Birthdays}
         options={{ title: 'Birthdays' }}
       />
     </MainStack.Navigator>
