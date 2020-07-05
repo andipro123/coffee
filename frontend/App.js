@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './screens/Home';
 import AddBdayModal from './screens/AddBdayModal';
+import AddTodoModal from './screens/AddTodoModal';
 import Birthdays from './screens/Birthdays';
 import Todos from './screens/Todos';
 import Passwords from './screens/Passwords';
@@ -67,12 +68,26 @@ const App = () => {
         <RootStack.Screen
           name="AddBdayModal"
           component={AddBdayModal}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            cardStyle: { backgroundColor: 'rgba(0,0,0,0.6)' },
+          }}
         />
         <RootStack.Screen
           name="AddPwModal"
           component={AddPwModal}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+            cardStyle: { backgroundColor: 'rgba(0,0,0,0.6)' },
+          }}
+        />
+        <RootStack.Screen
+          name="AddTodoModal"
+          component={AddTodoModal}
+          options={{
+            headerShown: false,
+            cardStyle: { backgroundColor: 'rgba(0,0,0,0.6)' },
+          }}
         />
       </RootStack.Navigator>
     </NavigationContainer>

@@ -1,20 +1,61 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Card, CardItem, Left, Text, Body, Right, CheckBox } from 'native-base';
 import { View, StyleSheet } from 'react-native';
 
 const Todo = ({ id, todo, isCompleted }) => {
+  const [check, setCheck] = useState(isCompleted);
+
+  const updateTodo = useCallback(async () => {
+    let response = await fetch(
+      'http://192.168.0.103:8000/todos/' + id.toString() + '/',
+      {
+        method: 'PATCH',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          todoText: todo,
+          isCompleted: !check,
+        }),
+      },
+    ).catch((err) => console.log(err));
+
+    if (response.status === 201) {
+      console.log('Done!');
+    } else {
+      console.log(response.status);
+    }
+
+    response = await fetch(
+      'http://192.168.0.103:8000/todos/' + id.toString() + '/',
+      {
+        method: 'DELETE',
+      },
+    ).catch((err) => console.log(err));
+
+    if (response.status === 204) {
+      console.log('Deleted!');
+    } else {
+      console.log(response.status);
+    }
+  }, [check]);
+
   return (
     <View style={styles.container}>
       <Card style={styles.cardStyle}>
         <CardItem style={styles.cardItemStyle} first>
+          <Text style={[styles.textBody, styles.accentText]}>{todo}</Text>
           <Right>
-            <Body>
-              <Text style={[styles.textBody, { fontWeight: 'bold' }]}>
-                {id}
-              </Text>
-              <Text style={[styles.textBody, styles.accentText]}>{todo}</Text>
-            </Body>
-            <CheckBox checked={isCompleted} />
+            <CheckBox
+              checked={check}
+              style={{ marginRight: 0 }}
+              onPress={() => {
+                setCheck(!check);
+                updateTodo();
+              }}
+            />
           </Right>
         </CardItem>
       </Card>
@@ -27,23 +68,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10,
+    borderRadius: 20,
   },
   cardStyle: {
-    width: 350,
-    height: 140,
+    width: 310,
+    height: 80,
+    borderRadius: 20,
+    marginRight: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   cardItemStyle: {
     flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   accentText: {
-    color: '#5f27cd',
-  },
-  thumbnail: {
-    height: 50,
-    width: 50,
+    color: '#1B9CFC',
   },
   textBody: {
-    paddingVertical: 5,
+    alignSelf: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
 

@@ -8,7 +8,7 @@ const Birthdays = ({ navigation }) => {
 
   const loadBirthdays = useCallback(async () => {
     const result = await fetch(
-      'http://192.168.0.102:8000/birthdays/',
+      'http://192.168.0.103:8000/birthdays/',
     ).catch((err) => console.log(err));
 
     const list = await result.json();

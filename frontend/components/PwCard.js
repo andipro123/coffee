@@ -45,16 +45,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10,
+    borderRadius: 20,
   },
   cardStyle: {
-    width: 350,
-    height: 140,
+    width: 310,
+    height: 160,
+    borderRadius: 20,
+    marginRight: 15,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   cardItemStyle: {
     flex: 1,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   accentText: {
-    color: '#5f27cd',
+    color: '#1B9CFC',
   },
   thumbnail: {
     height: 50,
@@ -62,6 +68,7 @@ const styles = StyleSheet.create({
   },
   textBody: {
     paddingVertical: 5,
+    fontSize: 16,
   },
 });
 

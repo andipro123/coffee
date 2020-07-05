@@ -15,14 +15,13 @@ import {
   Icon,
 } from 'native-base';
 
-const AddBdayModal = ({ navigation }) => {
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
-  const [note, setNote] = useState('');
+const AddTodoModal = ({ navigation }) => {
+  const [id, setId] = useState(1);
+  const [todo, setTodo] = useState('');
 
   const postInput = async () => {
     try {
-      const response = await fetch('http://192.168.0.103:8000/birthdays/', {
+      const response = await fetch('http://192.168.0.103:8000/todos/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -30,9 +29,9 @@ const AddBdayModal = ({ navigation }) => {
         },
         credentials: 'include',
         body: JSON.stringify({
-          name: name,
-          date: date,
-          note: note,
+          id: id,
+          todoText: todo,
+          isCompleted: false,
         }),
       });
 
@@ -65,45 +64,21 @@ const AddBdayModal = ({ navigation }) => {
             <Label
               style={{ fontFamily: 'HoeflerText-Black', color: '#1B9CFC' }}
             >
-              Name
+              Todo
             </Label>
-            <Input onChangeText={(text) => setName(text)} />
+            <Textarea rowSpan={4} onChangeText={(text) => setTodo(text)} />
           </Item>
-          <Item inlineLabel>
-            <Label
-              style={{ fontFamily: 'HoeflerText-Black', color: '#1B9CFC' }}
-            >
-              Date
-            </Label>
-            <DatePicker
-              defaultDate={new Date(2020, 7, 2)}
-              minimumDate={new Date(1890, 1, 1)}
-              maximumDate={new Date(2020, 7, 2)}
-              locale={'en'}
-              timeZoneOffsetInMinutes={undefined}
-              modalTransparent={false}
-              animationType={'fade'}
-              androidMode={'default'}
-              placeHolderText="Select date"
-              textStyle={{
-                color: '#1B9CFC',
-                fontSize: 18,
-                fontFamily: 'HoeflerText-Black',
-              }}
-              placeHolderTextStyle={{ color: '#d3d3d3' }}
-              onDateChange={(date) => setDate(date.toDateString())}
-              disabled={false}
-            />
-          </Item>
-          <Item inlineLabel>
-            <Label
-              style={{ fontFamily: 'HoeflerText-Black', color: '#1B9CFC' }}
-            >
-              Note
-            </Label>
-            <Textarea rowSpan={4} onChangeText={(text) => setNote(text)} />
-          </Item>
-          <Button iconLeft onPress={postInput} style={styles.button}>
+          <Text>
+            {id} {todo}
+          </Text>
+          <Button
+            iconLeft
+            onPress={() => {
+              setId(id + 1);
+              postInput();
+            }}
+            style={styles.button}
+          >
             <Icon name="ios-add" style={{ color: '#1B9CFC' }} />
             <Text
               style={{
@@ -151,4 +126,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddBdayModal;
+export default AddTodoModal;

@@ -8,9 +8,6 @@ import {
   Item,
   Input,
   Label,
-  Title,
-  DatePicker,
-  Textarea,
   Button,
   Icon,
 } from 'native-base';
@@ -22,7 +19,7 @@ const AddPwModal = ({ navigation }) => {
 
   const postInput = async () => {
     try {
-      const response = await fetch('http://192.168.0.102:8000/passwords/', {
+      const response = await fetch('http://192.168.0.103:8000/passwords/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -49,28 +46,27 @@ const AddPwModal = ({ navigation }) => {
 
   return (
     <Container style={styles.container}>
-      <Header style={styles.header}>
-        <Title style={{ color: '#fff', fontSize: 24, fontWeight: 'bold' }}>
-          Add a birthday
-        </Title>
-      </Header>
       <Content contentContainerStyle={{ alignItems: 'center' }}>
         <Form style={styles.form}>
-          <Item floatingLabel>
+          <Item inlineLabel>
             <Label>website</Label>
             <Input onChangeText={(text) => setWebsite(text)} />
           </Item>
-          <Item floatingLabel>
+          <Item inlineLabel>
             <Label>username</Label>
             <Input onChangeText={(text) => setUsername(text)}></Input>
           </Item>
-          <Item floatingLabel>
+          <Item inlineLabel>
             <Label>password</Label>
             <Input onChangeText={(text) => setPassword(text)} />
           </Item>
           <Button iconLeft onPress={postInput} style={styles.button}>
-            <Icon website="ios-add" style={{ color: '#5f27cd' }} />
-            <Text style={{ marginLeft: 30, fontSize: 20, color: '#5f27cd' }}>
+            <Icon
+              website="ios-add"
+              fontSize={30}
+              style={{ color: '#1B9CFC' }}
+            />
+            <Text style={{ marginLeft: 30, fontSize: 20, color: '#1B9CFC' }}>
               Save
             </Text>
           </Button>
@@ -86,31 +82,29 @@ const AddPwModal = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 10,
-    justifyContent: 'space-around',
+    height: 400,
+    justifyContent: 'flex-end',
+    backgroundColor: 'transparent',
   },
   form: {
-    marginVertical: 40,
-    width: 340,
-    height: 350,
+    marginTop: 250,
+    width: 360,
+    height: 410,
     paddingVertical: 20,
-    borderWidth: 2,
-    borderRadius: 10,
-    borderColor: '#5f27cd',
-  },
-  header: {
-    backgroundColor: '#5f27cd',
+    borderRadius: 20,
+    borderColor: '#1B9CFC',
+    backgroundColor: '#fff',
   },
   button: {
     alignSelf: 'center',
-    marginVertical: 40,
+    marginTop: 100,
     width: 130,
     justifyContent: 'flex-start',
     alignItems: 'center',
     textAlign: 'center',
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: '#5f27cd',
+    borderColor: '#1B9CFC',
   },
 });
 

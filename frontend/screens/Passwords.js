@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { ImageBackground, FlatList, StyleSheet } from 'react-native';
 import PwCard from '../components/PwCard';
 import { Button, Icon, Text } from 'native-base';
 
@@ -8,16 +8,16 @@ const Passwords = ({ navigation }) => {
 
   const loadPasswords = useCallback(async () => {
     const result = await fetch(
-      'http://192.168.0.102:8000/passwords/',
+      'http://192.168.0.103:8000/passwords/',
     ).catch((err) => console.log(err));
 
     const list = await result.json();
 
     if (result.ok) {
       setPasswordList(list);
-      console.log(passwordList);
     } else {
       console.log('Error with the request');
+      navigation.navigate('Home');
     }
   }, []);
 
@@ -26,15 +26,18 @@ const Passwords = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../assets/bg.png')}
+      style={{ width: 400 }}
+      resizeMode={'cover'}
+    >
       <Button
-        transparent
         iconLeft
         onPress={() => navigation.navigate('AddPwModal')}
         style={styles.buttonStyle}
       >
-        <Icon name="ios-add" style={{ color: '#5f27cd', fontSize: 25 }} />
-        <Text style={{ color: '#5f27cd' }}>Add a password</Text>
+        <Icon name="ios-add" style={{ color: '#1B9CFC', fontSize: 25 }} />
+        <Text style={{ color: '#1B9CFC', fontSize: 18 }}>Add a password</Text>
       </Button>
       <FlatList
         data={passwordList}
@@ -46,34 +49,23 @@ const Passwords = ({ navigation }) => {
             password={item.password}
           />
         )}
-        ItemSeparatorComponent={Separator}
       />
-    </View>
-  );
-};
-
-const Separator = () => {
-  return (
-    <View
-      style={{
-        height: 1,
-        width: '100%',
-        backgroundColor: '#5f27cd',
-      }}
-    />
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
   },
   buttonStyle: {
+    marginTop: 5,
+    marginHorizontal: 10,
     width: 160,
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'left',
+    backgroundColor: 'transparent',
   },
 });
 

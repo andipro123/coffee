@@ -37,12 +37,14 @@ const styles = StyleSheet.create({
   cardStyle: {
     width: 310,
     height: 160,
+    borderRadius: 20,
     marginRight: 15,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   cardItemStyle: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
   },
   accentText: {
     color: '#1B9CFC',

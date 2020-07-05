@@ -67,7 +67,7 @@ def TodoList(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'DELETE'])
+@api_view(['GET', 'DELETE', 'PATCH'])
 @permission_classes((permissions.AllowAny, ))
 def delTodo(request, pk):
     try:
@@ -85,3 +85,12 @@ def delTodo(request, pk):
 
         serializer = TodoSerializer(todo, context={'request': request})
         return Response(serializer.data)
+
+    elif request.method == 'PATCH':
+
+        serializer = TodoSerializer(data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

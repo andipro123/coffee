@@ -1,9 +1,21 @@
 import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 import { Card, CardItem, Body, Text, Left } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import * as LocalAuthentication from 'expo-local-authentication';
 
 const SubApp = ({ navigation, name, img }) => {
+  const authenticate = async () => {
+    let response = await LocalAuthentication.authenticateAsync({
+      promptMessage: 'Authenticate using TouchID',
+    }).catch((err) => console.log(err));
+
+    if (response.success) {
+      console.log('Success!');
+    } else {
+      console.log('Authentication failed!');
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Card style={styles.cardStyle}>
@@ -11,6 +23,9 @@ const SubApp = ({ navigation, name, img }) => {
           style={styles.cardItemStyle}
           button
           onPress={() => {
+            if (name === 'Passwords') {
+              console.log(authenticate());
+            }
             navigation.navigate(name);
           }}
         >
