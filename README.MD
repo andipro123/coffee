@@ -27,7 +27,7 @@ cd SubApp
 python manage.py runserver 0.0.0.0:8000
 ```
 
-![app demo](gif.gif)
+![app demo](https://github.com/andipro123/coffee/blob/master/demo.gif)
 
 ## Contributing
 
