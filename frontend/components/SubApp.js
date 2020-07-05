@@ -1,9 +1,9 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { Card, CardItem, Body, Text, Left } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const SubApp = ({ navigation, name, icon }) => {
+const SubApp = ({ navigation, name, img }) => {
   return (
     <View style={styles.container}>
       <Card style={styles.cardStyle}>
@@ -14,12 +14,7 @@ const SubApp = ({ navigation, name, icon }) => {
             navigation.navigate(name);
           }}
         >
-          <Icon
-            name={icon}
-            size={30}
-            color="#5f27cd"
-            style={styles.iconStyle}
-          />
+          <Image source={img} style={styles.img} resizeMode={'contain'}></Image>
           <Text style={styles.textStyle}>{name}</Text>
         </CardItem>
       </Card>
@@ -29,26 +24,45 @@ const SubApp = ({ navigation, name, icon }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
-    marginHorizontal: 10,
-  },
-  cardStyle: {
-    padding: 10,
-    width: 330,
-    height: 130,
-  },
-  cardItemStyle: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginVertical: 20,
+    marginRight: 30,
+  },
+  cardStyle: {
+    width: 280,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    borderRadius: 25,
+    height: 200,
+    shadowColor: '#576574',
+    shadowOffset: { width: 3, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
+  cardItemStyle: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0)',
+    textAlign: 'center',
   },
   textStyle: {
-    marginHorizontal: 10,
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'HoeflerText-Black',
+    textAlign: 'center',
+    width: 270,
+    marginBottom: 5,
+    marginTop: 15,
+    marginLeft: 0,
+    fontSize: 25,
+    backgroundColor: 'transparent',
+    fontWeight: '900',
+    color: '#1B9CFC',
   },
-  iconStyle: {
-    marginHorizontal: 10,
+  img: {
+    width: 170,
+    height: 130,
   },
 });
 

@@ -1,24 +1,36 @@
 import React from 'react';
 import { Thumbnail, Card, CardItem, Left, Text, Body } from 'native-base';
 import { View, StyleSheet } from 'react-native';
+import * as WebBrowser from 'expo-web-browser';
 
-const BdayCard = ({ name, date, note }) => {
+const PwCard = ({ website, username, password }) => {
   return (
     <View style={styles.container}>
       <Card style={styles.cardStyle}>
-        <CardItem style={styles.cardItemStyle}>
+        <CardItem style={styles.cardItemStyle} first>
           <Left>
             <Thumbnail
-              source={require('../assets/doctor.png')}
+              source={require('../assets/domain.png')}
               style={styles.thumbnail}
             />
             <Body>
-              <Text style={[styles.textBody, { fontWeight: 'bold' }]}>
-                {name}
+              <Text
+                style={[
+                  styles.textBody,
+                  { fontWeight: 'bold' },
+                  styles.accentText,
+                ]}
+                onPress={async () => {
+                  await WebBrowser.openAuthSessionAsync('https://' + website)
+                    .then(WebBrowser.dismissBrowser)
+                    .catch((err) => console.log(err));
+                }}
+              >
+                {website}
               </Text>
-              <Text style={[styles.textBody, styles.accentText]}>{date}</Text>
+              <Text style={styles.textBody}>Username: {username}</Text>
               <Text note style={styles.textBody}>
-                {note}
+                Password: {password}
               </Text>
             </Body>
           </Left>
@@ -35,17 +47,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   cardStyle: {
-    width: 310,
-    height: 160,
-    marginRight: 15,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    width: 350,
+    height: 140,
   },
   cardItemStyle: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
   },
   accentText: {
-    color: '#1B9CFC',
+    color: '#5f27cd',
   },
   thumbnail: {
     height: 50,
@@ -53,8 +62,7 @@ const styles = StyleSheet.create({
   },
   textBody: {
     paddingVertical: 5,
-    fontSize: 16,
   },
 });
 
-export default BdayCard;
+export default PwCard;

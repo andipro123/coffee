@@ -15,14 +15,14 @@ import {
   Icon,
 } from 'native-base';
 
-const AddBdayModal = ({ navigation }) => {
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
-  const [note, setNote] = useState('');
+const AddPwModal = ({ navigation }) => {
+  const [website, setWebsite] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const postInput = async () => {
     try {
-      const response = await fetch('http://192.168.0.102:8000/birthdays/', {
+      const response = await fetch('http://192.168.0.102:8000/passwords/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -30,9 +30,9 @@ const AddBdayModal = ({ navigation }) => {
         },
         credentials: 'include',
         body: JSON.stringify({
-          name: name,
-          date: date,
-          note: note,
+          website: website,
+          username: username,
+          password: password,
         }),
       });
 
@@ -56,39 +56,28 @@ const AddBdayModal = ({ navigation }) => {
       </Header>
       <Content contentContainerStyle={{ alignItems: 'center' }}>
         <Form style={styles.form}>
-          <Item inlineLabel>
-            <Label>Name</Label>
-            <Input onChangeText={(text) => setName(text)} />
+          <Item floatingLabel>
+            <Label>website</Label>
+            <Input onChangeText={(text) => setWebsite(text)} />
           </Item>
-          <Item inlineLabel>
-            <Label>Date</Label>
-            <DatePicker
-              defaultDate={new Date(2020, 7, 2)}
-              minimumDate={new Date(1890, 1, 1)}
-              maximumDate={new Date(2020, 7, 2)}
-              locale={'en'}
-              timeZoneOffsetInMinutes={undefined}
-              modalTransparent={false}
-              animationType={'fade'}
-              androidMode={'default'}
-              placeHolderText="Select date"
-              textStyle={{ color: '#5f27cd', fontSize: 20 }}
-              placeHolderTextStyle={{ color: '#d3d3d3' }}
-              onDateChange={(date) => setDate(date.toDateString())}
-              disabled={false}
-            />
+          <Item floatingLabel>
+            <Label>username</Label>
+            <Input onChangeText={(text) => setUsername(text)}></Input>
           </Item>
-          <Item inlineLabel>
-            <Label>Note</Label>
-            <Textarea rowSpan={4} onChangeText={(text) => setNote(text)} />
+          <Item floatingLabel>
+            <Label>password</Label>
+            <Input onChangeText={(text) => setPassword(text)} />
           </Item>
           <Button iconLeft onPress={postInput} style={styles.button}>
-            <Icon name="ios-add" style={{ color: '#5f27cd' }} />
+            <Icon website="ios-add" style={{ color: '#5f27cd' }} />
             <Text style={{ marginLeft: 30, fontSize: 20, color: '#5f27cd' }}>
-              Add
+              Save
             </Text>
           </Button>
         </Form>
+        <Text>
+          {website} {username} {password}
+        </Text>
       </Content>
     </Container>
   );
@@ -125,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddBdayModal;
+export default AddPwModal;

@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, ImageBackground } from 'react-native';
 import BdayCard from '../components/BdayCard';
 import { Button, Icon, Text } from 'native-base';
-import AddBdayModal from './AddBdayModal';
 
 const Birthdays = ({ navigation }) => {
   const [birthdayList, setBirthdayList] = useState([]);
 
   const loadBirthdays = useCallback(async () => {
-    const result = await fetch('http://192.168.0.105:8000/').catch((err) =>
-      console.log(err),
-    );
+    const result = await fetch(
+      'http://192.168.0.102:8000/birthdays/',
+    ).catch((err) => console.log(err));
 
     const list = await result.json();
 
@@ -26,50 +25,42 @@ const Birthdays = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require('../assets/bg.png')}
+      style={{ width: 400 }}
+      resizeMode={'cover'}
+    >
       <Button
-        transparent
         iconLeft
         onPress={() => navigation.navigate('AddBdayModal')}
         style={styles.buttonStyle}
       >
-        <Icon name="ios-add" style={{ color: '#5f27cd', fontSize: 25 }} />
-        <Text style={{ color: '#5f27cd' }}>Add a birthday</Text>
+        <Icon name="ios-add" style={{ color: '#1B9CFC', fontSize: 25 }} />
+        <Text style={{ color: '#1B9CFC', fontSize: 18 }}>Add a birthday</Text>
       </Button>
       <FlatList
         data={birthdayList}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
           <BdayCard name={item.name} note={item.note} date={item.date} />
         )}
-        ItemSeparatorComponent={Separator}
       />
-    </View>
-  );
-};
-
-const Separator = () => {
-  return (
-    <View
-      style={{
-        height: 1,
-        width: '100%',
-        backgroundColor: '#5f27cd',
-      }}
-    />
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
   },
   buttonStyle: {
+    marginTop: 5,
+    marginHorizontal: 10,
     width: 160,
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'left',
+    backgroundColor: 'transparent',
   },
 });
 

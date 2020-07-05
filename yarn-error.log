@@ -1,0 +1,31 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
+
+PATH: 
+  C:\Windows\System32\;C:\Program Files\swipl\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Users\andip\Anaconda3;C:\Users\andip\Anaconda3\Library\mingw-w64\bin;C:\Users\andip\Anaconda3\Library\usr\bin;C:\Users\andip\Anaconda3\Library\bin;C:\Users\andip\Anaconda3\Scripts;C:\Users\andip\AppData\Local\Microsoft\WindowsApps;C:\Users\andip\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\andip\AppData\Local\GitHubDesktop\bin;C:\Program Files (x86)\clisp-2.49;C:\Users\andip\AppData\Roaming\npm;C:\Users\andip\AppData\Local\Yarn\bin;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\heroku\bin
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  12.18.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: C:\Users\andip\Documents\Projects\coffee\package.json: Unexpected end of JSON input
+      at JSON.parse (<anonymous>)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:310:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:321:13
+
+npm manifest: 
+  
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

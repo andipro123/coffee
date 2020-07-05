@@ -1,4 +1,6 @@
 from django.contrib import admin
-from .models import Birthday
+from . import models
 # Register your models here.
-admin.site.register(Birthday)
+admin.site.register(models.Birthday)
+admin.site.register(models.Password)
+admin.site.register(models.Todo)
