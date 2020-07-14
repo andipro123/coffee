@@ -6,10 +6,11 @@ import { Button, Icon, Text } from 'native-base';
 
 const Todos = ({ navigation }) => {
   const [todoList, setTodoList] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const loadTodos = useCallback(async () => {
     const result = await fetch(
-      'http://192.168.0.103:8000/todos/',
+      'http://192.168.0.104:8000/todos/',
     ).catch((err) => console.log(err));
 
     const list = await result.json();
@@ -24,6 +25,12 @@ const Todos = ({ navigation }) => {
   useEffect(() => {
     loadTodos();
   }, []);
+
+  const refreshHandler = () => {
+    setIsRefreshing(true);
+    loadTodos();
+    setIsRefreshing(false);
+  };
 
   return (
     <ImageBackground
@@ -49,6 +56,8 @@ const Todos = ({ navigation }) => {
             isCompleted={item.isCompleted}
           />
         )}
+        refreshing={isRefreshing}
+        onRefresh={refreshHandler}
       />
     </ImageBackground>
   );

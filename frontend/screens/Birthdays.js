@@ -5,10 +5,11 @@ import { Button, Icon, Text } from 'native-base';
 
 const Birthdays = ({ navigation }) => {
   const [birthdayList, setBirthdayList] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const loadBirthdays = useCallback(async () => {
     const result = await fetch(
-      'http://192.168.0.103:8000/birthdays/',
+      'http://192.168.0.104:8000/birthdays/',
     ).catch((err) => console.log(err));
 
     const list = await result.json();
@@ -23,6 +24,12 @@ const Birthdays = ({ navigation }) => {
   useEffect(() => {
     loadBirthdays();
   }, []);
+
+  const refreshHandler = () => {
+    setIsRefreshing(true);
+    loadBirthdays();
+    setIsRefreshing(false);
+  };
 
   return (
     <ImageBackground
@@ -44,6 +51,8 @@ const Birthdays = ({ navigation }) => {
         renderItem={({ item }) => (
           <BdayCard name={item.name} note={item.note} date={item.date} />
         )}
+        refreshing={isRefreshing}
+        onRefresh={refreshHandler}
       />
     </ImageBackground>
   );

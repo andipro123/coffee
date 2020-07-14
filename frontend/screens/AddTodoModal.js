@@ -21,7 +21,7 @@ const AddTodoModal = ({ navigation }) => {
 
   const postInput = async () => {
     try {
-      const response = await fetch('http://192.168.0.103:8000/todos/', {
+      const response = await fetch('http://192.168.0.104:8000/todos/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

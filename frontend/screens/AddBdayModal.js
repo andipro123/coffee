@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Modal } from 'react-native';
 import {
   Container,
-  Header,
   Content,
   Form,
   Item,
   Input,
   Label,
-  Title,
   DatePicker,
   Textarea,
   Button,
@@ -22,7 +20,7 @@ const AddBdayModal = ({ navigation }) => {
 
   const postInput = async () => {
     try {
-      const response = await fetch('http://192.168.0.103:8000/birthdays/', {
+      const response = await fetch('http://192.168.0.104:8000/birthdays/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',

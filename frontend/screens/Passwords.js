@@ -5,10 +5,11 @@ import { Button, Icon, Text } from 'native-base';
 
 const Passwords = ({ navigation }) => {
   const [passwordList, setPasswordList] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   const loadPasswords = useCallback(async () => {
     const result = await fetch(
-      'http://192.168.0.103:8000/passwords/',
+      'http://192.168.0.104:8000/passwords/',
     ).catch((err) => console.log(err));
 
     const list = await result.json();
@@ -24,6 +25,12 @@ const Passwords = ({ navigation }) => {
   useEffect(() => {
     loadPasswords();
   }, []);
+
+  const refreshHandler = () => {
+    setIsRefreshing(true);
+    loadPasswords();
+    setIsRefreshing(false);
+  };
 
   return (
     <ImageBackground
@@ -49,6 +56,8 @@ const Passwords = ({ navigation }) => {
             password={item.password}
           />
         )}
+        refreshing={isRefreshing}
+        onRefresh={refreshHandler}
       />
     </ImageBackground>
   );
